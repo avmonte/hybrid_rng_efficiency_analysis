@@ -1,6 +1,5 @@
-import random
-import requests
 import json
+import requests
 import yaml
 import numpy as np
 
