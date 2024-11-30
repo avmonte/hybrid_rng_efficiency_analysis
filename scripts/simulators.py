@@ -5,8 +5,7 @@ from common import *
 
 
 # Pi Estimation Simulator
-def estimate_pi(num_points, seed=None):
-    handle(seed)
+def estimate_pi(num_points):
     inside_circle = 0
     for _ in range(num_points):
         x, y = random.random(), random.random()
@@ -15,9 +14,9 @@ def estimate_pi(num_points, seed=None):
     return (inside_circle / num_points) * 4
 
 
-def convergence_speed(iterations, threshold, seed=None):
+def convergence_speed(iterations, threshold):
     for i in range(1000, iterations, 1000):
-        error = compute_accuracy(estimate_pi(i, seed))
+        error = compute_accuracy(estimate_pi(i))
         if error < threshold:
             return i
 
@@ -25,8 +24,7 @@ def convergence_speed(iterations, threshold, seed=None):
 
 
 # Buffon's Needle Simulator
-def estimate_pi_buffon(needle_length, line_spacing, num_simulations, seed=None):
-    handle(seed)
+def estimate_pi_buffon(needle_length, line_spacing, num_simulations):
     if needle_length > line_spacing:
         raise ValueError("Needle length must be less than or equal to line spacing.")
 

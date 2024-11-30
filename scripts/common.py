@@ -9,16 +9,9 @@ def compute_accuracy(estimated):
     return abs(estimated - np.pi)
 
 
-def compute_variance(estimator_func, func_parameters, num_runs=100, seed=None):
-    estimates = np.array([estimator_func(*func_parameters, seed) for _ in range(num_runs)])
+def compute_variance(estimator_func, func_parameters, num_runs=100):
+    estimates = np.array([estimator_func(*func_parameters) for _ in range(num_runs)])
     return np.var(estimates)
-
-
-def handle(seed):
-    if seed is not None:
-        random.seed(seed)
-    else:
-        random.seed("magic number")
 
 
 def read_yaml(filepath):
