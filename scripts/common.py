@@ -8,9 +8,13 @@ def compute_accuracy(estimated):
     return abs(estimated - np.pi)
 
 
-def compute_variance(estimator_func, func_parameters, num_runs=100):
+def compute_variance(estimator_func, func_parameters, num_runs=100, printout=False):
     estimates = np.array([estimator_func(*func_parameters) for _ in range(num_runs)])
-    return np.var(estimates)
+    variance = np.var(estimates)
+
+    if printout:
+        print(f"Variance across {num_runs} runs: {variance:.2e}")
+    return variance
 
 
 def read_yaml(filepath):

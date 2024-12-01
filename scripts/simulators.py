@@ -13,13 +13,17 @@ def estimate_pi(num_points):
     return (inside_circle / num_points) * 4
 
 
-def convergence_speed(iterations, threshold):
+def convergence_speed(iterations, threshold, printout=False):
+    result = iterations
     for i in range(1000, iterations, 1000):
         error = compute_accuracy(estimate_pi(i))
         if error < threshold:
-            return i
+            result = i
+            break
 
-    return iterations
+    if printout:
+        print(f"Convergence speed (iterations to reach {threshold} accuracy): {result}")
+    return result
 
 
 # Buffon's Needle Simulator
@@ -39,3 +43,29 @@ def estimate_pi_buffon(needle_length, line_spacing, num_simulations):
         return float('inf')
     estimate = (2 * needle_length * num_simulations) / (line_spacing * crosses)
     return estimate
+
+
+def convergence_speed_buffon(iterations, needle_length=1, line_spacing=2, threshold=0.01, rng=random.random):
+    if needle_length > line_spacing:
+        raise ValueError("Needle length must not exceed line spacing for this implementation.")
+
+    hits = 0
+    converged_iteration = None
+
+    for i in tqdm(range(1, iterations + 1)):
+        d = rng() * (line_spacing / 2)
+        theta = rng() * np.pi
+
+        if d <= (needle_length / 2) * math.sin(theta):
+            hits += 1
+
+        if hits > 0:
+            pi_estimate = (2 * needle_length * i) / (line_spacing * hits)
+            error = abs(np.pi - pi_estimate)
+        else:
+            error = float('inf')
+
+        if converged_iteration is None and error < threshold:
+            converged_iteration = i
+
+    return converged_iteration
