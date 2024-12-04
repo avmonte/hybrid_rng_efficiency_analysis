@@ -1,10 +1,10 @@
 import math
-import random
 from common import *
 
 
 # Pi Estimation Simulator
-def estimate_pi(num_points):
+def estimate_pi(num_points, seed='p'):
+    handle(seed)
     inside_circle = 0
     for _ in range(num_points):
         x, y = random.random(), random.random()
@@ -27,7 +27,8 @@ def convergence_speed(iterations, threshold, printout=False):
 
 
 # Buffon's Needle Simulator
-def estimate_pi_buffon(needle_length, line_spacing, num_simulations):
+def estimate_pi_buffon(needle_length, line_spacing, num_simulations, seed='p'):
+    handle(seed)
     if needle_length > line_spacing:
         raise ValueError("Needle length must be less than or equal to line spacing.")
 
@@ -52,7 +53,7 @@ def convergence_speed_buffon(iterations, needle_length=1, line_spacing=2, thresh
     hits = 0
     converged_iteration = None
 
-    for i in tqdm(range(1, iterations + 1)):
+    for i in range(1, iterations + 1):
         d = rng() * (line_spacing / 2)
         theta = rng() * np.pi
 
