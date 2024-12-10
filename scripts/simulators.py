@@ -37,10 +37,10 @@ def convergence_speed(max_simulations, threshold, step=100, rng=random, printout
 
 # Buffon's Needle Simulator
 def estimate_pi_buffon(needle_length, line_spacing, num_needles, seed='c', rng=random):
-    if seed == 'c':
-        rng.seed(time.time())
-    else:
-        rng.seed(seed)
+    # if seed == 'c':
+    #     rng.seed(time.time())
+    # else:
+    #     rng.seed(seed)
     if needle_length > line_spacing:
         raise ValueError("Needle length must be less than or equal to line spacing.")
 
