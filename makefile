@@ -1,7 +1,7 @@
 # Variables
 NOTEBOOK = research.ipynb
 MARKDOWN = research.md
-PDF = research.pdf
+PDF = CS226_ResearchPaper_GevorgNersesian.pdf
 
 # Default target
 all: $(PDF)
@@ -12,7 +12,7 @@ $(MARKDOWN): $(NOTEBOOK)
 
 # Convert Markdown to PDF
 $(PDF): $(MARKDOWN)
-	pandoc $(MARKDOWN) -o $(PDF) --pdf-engine=xelatex
+	pandoc $(MARKDOWN) -o $(PDF) --pdf-engine=xelatex --metadata linkcolor=blue
 
 # Clean up intermediate files
 clean:
